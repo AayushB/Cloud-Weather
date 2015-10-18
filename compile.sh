@@ -1,1 +1,1 @@
-particle compile photon cloud-weather.ino Weather.h Weather.cpp --saveTo firmware.bin
+particle compile photon cloud-weather.ino Weather/Weather.h Weather/Weather.cpp --saveTo firmware.bin

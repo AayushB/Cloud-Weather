@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+#Weather model to include zipcode, temp and description
 class Weather(models.Model):
 	temperature = models.FloatField()
 	zipcode = models.IntegerField()

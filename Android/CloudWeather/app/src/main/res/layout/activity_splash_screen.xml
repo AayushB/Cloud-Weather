@@ -4,8 +4,56 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".SplashScreen">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".SplashScreen"
+    android:background="#558490"
+    android:id="@+id/splash_layout">
 
-    <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spark_logo"
+        android:src="@drawable/spark_logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/particle_photon"
+        android:layout_alignEnd="@+id/particle_photon"
+        android:layout_alignLeft="@+id/particle_photon"
+        android:layout_alignStart="@+id/particle_photon"
+        android:layout_above="@+id/cloud_weather" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="CLOUD WEATHER"
+        android:id="@+id/cloud_weather"
+        android:textColor="#ffffffff"
+        android:textSize="40sp"
+        android:fontFamily="sans-serif-thin"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="PARTICLE PHOTON"
+        android:id="@+id/particle_photon"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#aaffffff"
+        android:layout_marginTop="68dp"
+        android:layout_alignTop="@+id/cloud_weather"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aayush Bhandari  Astha Karki  Kimberly Villalobos"
+        android:id="@+id/names"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#aaffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp" />
 </RelativeLayout>

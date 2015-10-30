@@ -10,15 +10,31 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
 public class StoryScreenActivity extends AppCompatActivity {
 
 
     private Button flashButton;
+    private Weather weather;
+    private String weatherUrl;
+    private static final String TAG = StoryScreenActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_screen);
         flashButton = (Button) findViewById(R.id.flash_button);
+        weather= new Weather();
+        weatherUrl="http://api.openweathermap.org/data/2.5/weather?zip=%1$d,us&appid=bd82977b86bf27fb59a04b61b657fb6f";
+        updateWeather(94102);
+
+
 
 
         /*************************************************************
@@ -35,5 +51,32 @@ public class StoryScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    /*************************************************************
+     *             Update Weather Using OkHttp Client
+     *************************************************************/
+    public void updateWeather(int zipcode)
+    {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().
+                              url(String.format(weatherUrl, zipcode)).
+                              build();
+        Call call = client.newCall(request);
+        // Perform Asynchronous Web Service Call
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.v(TAG,"Something went wrong with the api request..");
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String jsonData= response.body().string();
+                Log.v(TAG, jsonData);
+                weather.update(jsonData);
+            }
+        });
+
     }
 }

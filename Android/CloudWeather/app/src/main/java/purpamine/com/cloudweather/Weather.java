@@ -10,11 +10,6 @@ public class Weather
     private String city;
     private String description;
 
-    public Weather()
-    {
-
-    }
-
     public int getTemperature() {
         return temperature;
     }
@@ -47,4 +42,8 @@ public class Weather
         this.description = description;
     }
 
+    public void update(String jsonData)
+    {
+        //do some update here
+    }
 }

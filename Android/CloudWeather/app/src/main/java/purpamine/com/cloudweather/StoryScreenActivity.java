@@ -1,7 +1,10 @@
 package purpamine.com.cloudweather;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,16 +70,30 @@ public class StoryScreenActivity extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.v(TAG,"Something went wrong with the api request..");
+                Log.v(TAG, "Something went wrong with the api request..");
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
-                String jsonData= response.body().string();
+                String jsonData = response.body().string();
                 Log.v(TAG, jsonData);
                 weather.update(jsonData);
             }
         });
 
+    }
+
+    /*************************************************************
+     *             Check if network is available
+     *************************************************************/
+    private boolean isNetworkAvailable() {
+        ConnectivityManager manager = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        boolean isAvailable = false;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            isAvailable = true;
+        }
+        return isAvailable;
     }
 }

@@ -1,5 +1,9 @@
 package purpamine.com.cloudweather;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Aayush on 10/29/15.
  */
@@ -42,8 +46,23 @@ public class Weather
         this.description = description;
     }
 
-    public void update(String jsonData)
+    public void update(String jsonData, int zipcode) throws JSONException
     {
-        //do some update here
+        //Get the required json objects
+        JSONObject response = new JSONObject(jsonData);
+        JSONObject weather = (JSONObject)response.getJSONArray("weather").get(0);
+        JSONObject main = response.getJSONObject("main");
+        // Set the member variables from the json responses
+        city = response.getString("name");
+        description= weather.getString("description");
+        temperature=kelvinToF(main.getDouble("temp"));
+        //update the zipcode
+        this.zipcode=zipcode;
+    }
+
+    // Change kelvin to Fahrenheit
+    private int kelvinToF(double temp)
+    {
+        return (int) ((temp - 273.15)* 1.8000 + 32.00);
     }
 }

@@ -19,6 +19,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 
 public class StoryScreenActivity extends AppCompatActivity {
@@ -35,10 +37,10 @@ public class StoryScreenActivity extends AppCompatActivity {
         flashButton = (Button) findViewById(R.id.flash_button);
         weather= new Weather();
         weatherUrl="http://api.openweathermap.org/data/2.5/weather?zip=%1$d,us&appid=bd82977b86bf27fb59a04b61b657fb6f";
-        updateWeather(94102);
 
-
-
+        //Update the weather if network is available
+        if(isNetworkAvailable())
+            updateWeather(94102);
 
         /*************************************************************
          *                    Button Effect on Touch
@@ -59,7 +61,7 @@ public class StoryScreenActivity extends AppCompatActivity {
     /*************************************************************
      *             Update Weather Using OkHttp Client
      *************************************************************/
-    public void updateWeather(int zipcode)
+    public void updateWeather(final int zipcode)
     {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().
@@ -76,8 +78,11 @@ public class StoryScreenActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 String jsonData = response.body().string();
-                Log.v(TAG, jsonData);
-                weather.update(jsonData);
+                try {
+                    weather.update(jsonData,zipcode);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

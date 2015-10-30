@@ -10,6 +10,10 @@ public class Weather
     private String city;
     private String description;
 
+    public Weather()
+    {
+
+    }
 
     public int getTemperature() {
         return temperature;

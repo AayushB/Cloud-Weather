@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -20,6 +22,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -30,6 +33,14 @@ public class StoryScreenActivity extends AppCompatActivity {
     private Weather weather;
     private String weatherUrl;
     private static final String TAG = StoryScreenActivity.class.getSimpleName();
+
+    private TextView temperatureTextView;
+    private TextView cityTextView;
+    private TextView descriptionTextView;
+    private EditText zipcodeEditText;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +49,17 @@ public class StoryScreenActivity extends AppCompatActivity {
         weather= new Weather();
         weatherUrl="http://api.openweathermap.org/data/2.5/weather?zip=%1$d,us&appid=bd82977b86bf27fb59a04b61b657fb6f";
 
+        //Instantiate views
+        temperatureTextView= (TextView) findViewById(R.id.temperature);
+        cityTextView = (TextView) findViewById(R.id.city);
+        descriptionTextView = (TextView) findViewById(R.id.description);
+        zipcodeEditText = (EditText) findViewById(R.id.zipcode);
+
         //Update the weather if network is available
         if(isNetworkAvailable())
             updateWeather(94102);
+
+
 
         /*************************************************************
          *                    Button Effect on Touch
@@ -54,6 +73,16 @@ public class StoryScreenActivity extends AppCompatActivity {
                     flashButton.setBackgroundColor(0xffcb3d00);
                 }
                 return false;
+            }
+        });
+
+        /*************************************************************
+         *                    Button On Click
+         *************************************************************/
+        flashButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateWeather(Integer.parseInt(zipcodeEditText.getText().toString()));
             }
         });
     }
@@ -79,7 +108,14 @@ public class StoryScreenActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 String jsonData = response.body().string();
                 try {
-                    weather.update(jsonData,zipcode);
+                    weather.update(jsonData, zipcode);
+                    // update display on main thread after completing network calls and parse
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateDisplay();
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -100,5 +136,13 @@ public class StoryScreenActivity extends AppCompatActivity {
             isAvailable = true;
         }
         return isAvailable;
+    }
+
+    private void updateDisplay()
+    {
+        temperatureTextView.setText(weather.getTemperature() + "°");
+        cityTextView.setText(weather.getCity());
+        descriptionTextView.setText(weather.getDescription());
+        zipcodeEditText.setText(weather.getZipcode() + "");
     }
 }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -57,7 +58,7 @@ public class StoryScreenActivity extends AppCompatActivity {
 
         //Update the weather if network is available
         if(isNetworkAvailable())
-            updateWeather(94102);
+            updateWeather(94128);
 
 
 
@@ -82,7 +83,14 @@ public class StoryScreenActivity extends AppCompatActivity {
         flashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateWeather(Integer.parseInt(zipcodeEditText.getText().toString()));
+                try
+                {
+                    updateWeather(Integer.parseInt(zipcodeEditText.getText().toString()));
+                }
+                catch (NumberFormatException e)
+                {
+                    Toast.makeText(getApplicationContext(), "Zipcode Must Be Digits!!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -118,6 +126,13 @@ public class StoryScreenActivity extends AppCompatActivity {
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Oops, Check Your Zipcode!!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                 }
             }
         });
@@ -140,9 +155,9 @@ public class StoryScreenActivity extends AppCompatActivity {
 
     private void updateDisplay()
     {
-        temperatureTextView.setText(weather.getTemperature() + "°");
-        cityTextView.setText(weather.getCity());
-        descriptionTextView.setText(weather.getDescription());
+        temperatureTextView.setText(weather.getTemperature() + "°F");
+        cityTextView.setText(weather.getCity().toUpperCase());
+        descriptionTextView.setText(weather.getDescription().toUpperCase());
         zipcodeEditText.setText(weather.getZipcode() + "");
     }
 }

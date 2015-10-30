@@ -12,20 +12,25 @@ import android.widget.Button;
 
 public class StoryScreenActivity extends AppCompatActivity {
 
+
+    private Button flashButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story_screen);
-        final Button x = (Button) findViewById(R.id.flash_button);
-        x.setOnTouchListener(new View.OnTouchListener() {
+        flashButton = (Button) findViewById(R.id.flash_button);
+
+
+        /*************************************************************
+         *                    Button Effect on Touch
+         *************************************************************/
+        flashButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-                    Log.d("TouchTest", "Touch down");
-                    x.setBackgroundColor(0xffff5f00);
+                    flashButton.setBackgroundColor(0xffff5f00);
                 } else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
-                    Log.d("TouchTest", "Touch up");
-                    x.setBackgroundColor(0xffcb3d00);
+                    flashButton.setBackgroundColor(0xffcb3d00);
                 }
                 return false;
             }

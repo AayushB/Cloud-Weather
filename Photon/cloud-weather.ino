@@ -16,7 +16,7 @@ void setup()
 {
   Serial.begin(9600); //debug
   pinMode(D0,OUTPUT); //debug
-  digitalWrite(D0, HIGH); //debug
+  digitalWrite(D0, LOW); //debug
 }
   
 void loop() 
@@ -41,6 +41,14 @@ int postWeatherData(String command)
 	Serial.println("Temperature: " + weather.getTemperature());
 	Serial.println("Description: " + weather.getDescription());
 	//return 1 for true
+	delay(200);
+	digitalWrite(D0, HIGH); //drama
+	delay(200);
+	digitalWrite(D0, LOW); //drama
+	delay(200);
+	digitalWrite(D0, HIGH); //drama
+	delay(200);
+	digitalWrite(D0, LOW); //drama
 	return 1;
 }
 

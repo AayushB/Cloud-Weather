@@ -1,14 +1,24 @@
 #include "application.h"
+#ifndef WEATHER_H
+#define WEATHER_H
 class Weather
 {
 public:
-	Weather(String apiKey, String zipcode);
-	void updateZipcode(String zipcode);
-	String getEvent();
-private:
-	String weatherData;
-	String event;
-	String apiKey;
-	void getWeather(String apiKey,String zipcode);
-};
+	// Getters 
+	String getZipcode();
+	String getTemperature();
+	String getCity();
+	String getDescription();
+	//Setters
+	void setZipcode(String zipcode);
+	void setTemperature(String temperature);
+	void setCity(String city);
+	void setDescription(String description);
 
+private:
+	String _zipcode;
+	String _temperature;
+	String _city;
+	String _description;
+};
+#endif

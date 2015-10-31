@@ -1,24 +1,27 @@
 #include "Weather.h"
-// Public api
-Weather::Weather(String apiKey, String zipcode)
-{
-	this->apiKey=apiKey;
-	this->getWeather(apiKey,zipcode);
+// Getters 
+String Weather::getZipcode(){
+	return _zipcode;
 }
-
-void Weather::updateZipcode(String zipcode)
-{
-	this->getWeather(this->apiKey,zipcode);
+String Weather::getTemperature(){
+	return _temperature;
 }
-
-String Weather::getEvent()
-{
-	return event;
+String Weather::getCity(){
+	return _city;
 }
-
-//private
-
-void Weather::getWeather(String apiKey,String zipcode)
-{
-	this->event="Event for "+ zipcode +"\n";
+String Weather::getDescription(){
+	return _description;
+}
+//Setters
+void Weather::setZipcode(String zipcode){
+	_zipcode=zipcode;
+}
+void Weather::setTemperature(String temperature){
+	_temperature=temperature;
+}
+void Weather::setCity(String city){
+	_city=city;
+}
+void Weather::setDescription(String description){
+	_description=description;
 }

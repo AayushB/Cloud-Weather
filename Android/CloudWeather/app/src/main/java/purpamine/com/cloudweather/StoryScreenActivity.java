@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 import org.json.JSONException;
@@ -117,6 +119,7 @@ public class StoryScreenActivity extends AppCompatActivity {
                 String jsonData = response.body().string();
                 try {
                     weather.update(jsonData, zipcode);
+                    updatePhoton();
                     // update display on main thread after completing network calls and parse
                     runOnUiThread(new Runnable() {
                         @Override
@@ -134,6 +137,42 @@ public class StoryScreenActivity extends AppCompatActivity {
                     });
 
                 }
+            }
+        });
+
+    }
+
+    /*************************************************************
+     *             Update Photon Using OkHttp Client
+     *************************************************************/
+    public void updatePhoton()
+    {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("access_token", "073ac659f61a49f0cac9308c0207896b2e245407")
+                .add("args", String.format("%1$s:%2$d:%3$d:%4$s",
+                        weather.getCity(),
+                        weather.getZipcode(),
+                        weather.getTemperature(),
+                        weather.getDescription()))
+                .build();
+
+        Request request = new Request.Builder().
+                url("https://api.particle.io/v1/devices/AKA/weather").
+                post(formBody).
+                build();
+        Call call = client.newCall(request);
+        // Perform Asynchronous Web Service Call
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.v(TAG, "Something went wrong with the api request..");
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String jsonData = response.body().string();
+                Log.v(TAG,jsonData);
             }
         });
 

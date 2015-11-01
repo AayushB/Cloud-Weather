@@ -14,6 +14,16 @@ public class Weather
     private String city;
     private String description;
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    private String icon;
+
     public int getTemperature() {
         return temperature;
     }
@@ -55,6 +65,7 @@ public class Weather
         // Set the member variables from the json responses
         city = response.getString("name");
         description= weather.getString("description");
+        icon=weather.getString("icon");
         temperature=kelvinToF(main.getDouble("temp"));
         //update the zipcode
         this.zipcode=zipcode;

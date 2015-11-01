@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class StoryScreenActivity extends AppCompatActivity {
     private TextView cityTextView;
     private TextView descriptionTextView;
     private EditText zipcodeEditText;
+    private ImageView weatherIcon;
 
 
 
@@ -57,6 +59,7 @@ public class StoryScreenActivity extends AppCompatActivity {
         cityTextView = (TextView) findViewById(R.id.city);
         descriptionTextView = (TextView) findViewById(R.id.description);
         zipcodeEditText = (EditText) findViewById(R.id.zipcode);
+        weatherIcon = (ImageView) findViewById(R.id.weather_icon);
 
         //Update the weather if network is available
         if(isNetworkAvailable())
@@ -194,9 +197,10 @@ public class StoryScreenActivity extends AppCompatActivity {
 
     private void updateDisplay()
     {
-        temperatureTextView.setText(weather.getTemperature() + "°F");
+        temperatureTextView.setText(weather.getTemperature()+"");
         cityTextView.setText(weather.getCity().toUpperCase());
         descriptionTextView.setText(weather.getDescription().toUpperCase());
         zipcodeEditText.setText(weather.getZipcode() + "");
+
     }
 }

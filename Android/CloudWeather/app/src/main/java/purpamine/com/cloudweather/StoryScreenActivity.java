@@ -202,7 +202,26 @@ public class StoryScreenActivity extends AppCompatActivity {
         descriptionTextView.setText(weather.getDescription().toUpperCase());
         zipcodeEditText.setText(weather.getZipcode() + "");
 
-        weatherIcon.setImageResource(R.drawable.mist);
+        Log.v(TAG,weather.getIcon());
+        if(weather.getIcon().equals("01"))
+            weatherIcon.setImageResource(R.drawable.clear);
+        else if(weather.getIcon().equals("02"))
+            weatherIcon.setImageResource(R.drawable.part_clouds);
+        else if(weather.getIcon().equals("03") || weather.getIcon().equals("04"))
+            weatherIcon.setImageResource(R.drawable.full_clouds);
+        else if(weather.getIcon().equals("09"))
+            weatherIcon.setImageResource(R.drawable.shower);
+        else if(weather.getIcon().equals("10"))
+            weatherIcon.setImageResource(R.drawable.rain);
+        else if(weather.getIcon().equals("11"))
+            weatherIcon.setImageResource(R.drawable.thunder_storm);
+        else if(weather.getIcon().equals("13"))
+            weatherIcon.setImageResource(R.drawable.snow);
+        else if(weather.getIcon().equals("50"))
+            weatherIcon.setImageResource(R.drawable.mist);
+        else
+            weatherIcon.setVisibility(View.INVISIBLE);
+
 
     }
 }

@@ -88,7 +88,7 @@
         android:id="@+id/description"
         android:fontFamily="sans-serif-thin"
         android:textColor="#ddffffff"
-        android:textSize="35sp"
+        android:textSize="25sp"
         android:text="PARTLY CLOUDY"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"

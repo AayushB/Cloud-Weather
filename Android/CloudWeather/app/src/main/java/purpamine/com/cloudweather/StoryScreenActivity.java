@@ -202,7 +202,7 @@ public class StoryScreenActivity extends AppCompatActivity {
         descriptionTextView.setText(weather.getDescription().toUpperCase());
         zipcodeEditText.setText(weather.getZipcode() + "");
 
-        Log.v(TAG,weather.getIcon());
+        //Change Weather logo based on the weather id.
         if(weather.getIcon().equals("01"))
             weatherIcon.setImageResource(R.drawable.clear);
         else if(weather.getIcon().equals("02"))

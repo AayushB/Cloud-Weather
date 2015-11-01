@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="wrap_content"
     android:layout_height="match_parent" android:paddingLeft="50dp"
     android:paddingRight="50dp"
     android:paddingTop="30dp"
@@ -36,7 +36,6 @@
         android:textColor="#ddffffff"
         android:textSize="100sp"
         android:text="65"
-        android:textAlignment="center"
         android:textIsSelectable="false"
         android:layout_below="@+id/city"
         android:layout_alignParentLeft="true"
@@ -90,13 +89,13 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ddffffff"
         android:textSize="35sp"
-        android:textAlignment="center"
         android:text="PARTLY CLOUDY"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -108,8 +107,8 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#88ffffff"
         android:layout_above="@+id/description"
-        android:layout_toRightOf="@+id/temperature"
-        android:layout_toEndOf="@+id/temperature" />
+        android:layout_toEndOf="@+id/temperature"
+        android:layout_toRightOf="@+id/temperature" />
 
     <ImageView
         android:layout_width="wrap_content"

@@ -202,5 +202,7 @@ public class StoryScreenActivity extends AppCompatActivity {
         descriptionTextView.setText(weather.getDescription().toUpperCase());
         zipcodeEditText.setText(weather.getZipcode() + "");
 
+        weatherIcon.setImageResource(R.drawable.mist);
+
     }
 }

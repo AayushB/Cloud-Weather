@@ -52,7 +52,7 @@ public class StoryScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_story_screen);
         flashButton = (Button) findViewById(R.id.flash_button);
         weather= new Weather();
-        weatherUrl="http://api.openweathermap.org/data/2.5/weather?zip=%1$d,us&appid=bd82977b86bf27fb59a04b61b657fb6f";
+        weatherUrl="http://api.openweathermap.org/data/2.5/weather?zip=%1$d,us&appid=523fd37b9ce41fba06f023e968a27133";
 
         //Instantiate views
         temperatureTextView= (TextView) findViewById(R.id.temperature);
